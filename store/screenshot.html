@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=1280,initial-scale=1">
+  <title>Framehush — Chrome Web Store screenshot</title>
+  <style>
+    * { box-sizing: border-box; }
+    html, body { margin: 0; width: 1280px; height: 800px; overflow: hidden; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+      color: #253c32;
+      background: #eef0e7;
+    }
+    .canvas {
+      position: relative;
+      width: 1280px;
+      height: 800px;
+      background: linear-gradient(110deg, #f4f5ef 0%, #f4f5ef 44%, #e4ebdd 76%, #d5e2ce 100%);
+    }
+    .brand {
+      position: absolute;
+      top: 57px;
+      left: 72px;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 26px;
+      font-weight: 650;
+      letter-spacing: -.7px;
+    }
+    .brand img { display: block; width: 56px; height: 56px; }
+    .copy { position: absolute; top: 214px; left: 80px; width: 520px; }
+    .eyebrow { margin: 0 0 22px; color: #60745e; font-size: 13px; letter-spacing: 2.1px; font-weight: 650; }
+    h1 { margin: 0; font-size: 62px; line-height: 1.07; letter-spacing: -2.5px; font-weight: 620; }
+    .benefit { margin: 28px 0 0; color: #55634f; font-size: 24px; line-height: 1.5; letter-spacing: -.35px; }
+    .privacy { display: flex; gap: 22px; margin-top: 37px; font-size: 17px; color: #35563e; }
+    .privacy span { display: flex; align-items: center; gap: 8px; }
+    .privacy span::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: #6f8d5e; }
+    .languages { position: absolute; left: 80px; bottom: 72px; margin: 0; font-size: 14px; color: #6d7766; letter-spacing: .1px; }
+    .popup {
+      position: absolute;
+      top: 62.5px;
+      left: 680px;
+      width: 522px;
+      height: 675px;
+      box-shadow: 0 24px 70px #263c321c, 0 3px 12px #263c3210;
+    }
+    .popup img { display: block; width: 522px; height: 675px; }
+  </style>
+</head>
+<body>
+  <main class="canvas">
+    <div class="brand"><img src="assets/icon-128.png" alt="">Framehush</div>
+    <section class="copy" aria-label="Features">
+      <p class="eyebrow">REAL-TIME SPEECH DENOISING</p>
+      <h1>Keep your focus<br>on the voice.</h1>
+      <p class="benefit">Reduce background noise.<br>Process audio on your device.</p>
+      <div class="privacy"><span>No recordings</span><span>No uploads</span></div>
+    </section>
+    <p class="languages">English · 繁體中文 · 简体中文</p>
+    <!-- Unmodified screenshot of the real running extension, displayed at 1.5×. -->
+    <div class="popup"><img src="assets/popup-running.png" width="522" height="675" alt="Actual Framehush popup with Denoising is on status and Stop denoising button"></div>
+  </main>
+</body>
+</html>

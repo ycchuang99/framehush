@@ -21,10 +21,12 @@ The [listing guide](https://developer.chrome.com/docs/webstore/cws-dashboard-lis
 | Extension and listing icon | `assets/icon-128.png`, 128 × 128 PNG; the central 96 × 96 artwork has transparent margins. Also bundled in `src/icons/` and declared in `manifest.icons`. |
 | Additional extension icons | `assets/icon-16.png`, `assets/icon-32.png`, `assets/icon-48.png`; also bundled in `src/icons/` with matching manifest entries. |
 | Small promotional tile | `assets/small-promo-440x280.png`, 440 × 280 RGB PNG. |
-| Screenshot | At least one actual screenshot, 1280 × 800 preferred (640 × 400 also accepted by the image guide), up to five. Capture the final localized UI after removing the unwanted footer. |
+| Screenshot | `assets/screenshot-1280x800.png`, 1280 × 800 RGB PNG, showing the final English popup during actual audio processing. |
 | Marquee | Optional, 1400 × 560. |
 
 The [image guide](https://developer.chrome.com/docs/webstore/images) explicitly identifies the icon, small promotional image, and at least one screenshot as mandatory. A promotional video is not among that guide's minimum assets; confirm the current dashboard if its fields differ.
+
+The screenshot is captured from `screenshot.html`. Its popup image, `assets/popup-running.png`, is an unmodified capture from the passing browser test, displayed at 1.5× size. The surrounding HTML provides the brand and feature description; it does not replace or reconstruct the extension UI.
 
 ## Privacy practices: copy-ready fields
 
