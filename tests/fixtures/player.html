@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<title>Framehush speech and noise test</title>
+<style>
+  body { font: 18px system-ui; margin: 48px; color: #182a2d; background: #edf4f2; }
+  video { display: block; width: 640px; max-width: 100%; margin: 20px 0; background: #182a2d; }
+  button { font: inherit; padding: 12px 24px; }
+</style>
+<h1>Framehush speech and noise test</h1>
+<button id="play">Play test video</button>
+<video controls playsinline></video>
+<p>Locally generated speech with deterministic background noise.</p>
+<script>
+  document.querySelector("#play").onclick = async () => {
+    if (window.fixture) return document.querySelector("video").play();
+    const context = new AudioContext({ sampleRate: 48000 });
+    const response = await fetch("/speech.wav");
+    const speech = await context.decodeAudioData(await response.arrayBuffer());
+    const frames = speech.length + 48000 * 4;
+    const buffer = context.createBuffer(2, frames, 48000);
+    let seed = 123456789;
+    for (let i = 0; i < frames; i++) {
+      seed = (Math.imul(seed, 1664525) + 1013904223) >>> 0;
+      const noise = (seed / 4294967296 * 2 - 1) * 0.035;
+      const voice = speech.getChannelData(0)[i - 96000] || 0;
+      buffer.getChannelData(0)[i] = voice * 0.8 + noise;
+      buffer.getChannelData(1)[i] = voice * 0.65 + noise;
+    }
+    const source = context.createBufferSource();
+    source.buffer = buffer;
+    source.loop = true;
+    const output = context.createMediaStreamDestination();
+    source.connect(output);
+    const canvas = document.createElement("canvas");
+    canvas.width = 640;
+    canvas.height = 360;
+    const paint = canvas.getContext("2d");
+    paint.fillStyle = "#173d37";
+    paint.fillRect(0, 0, 640, 360);
+    paint.fillStyle = "#ddf4e7";
+    paint.font = "32px system-ui";
+    paint.fillText("Speech + background noise", 65, 180);
+    const video = document.querySelector("video");
+    video.srcObject = new MediaStream([
+      ...canvas.captureStream(1).getVideoTracks(),
+      ...output.stream.getAudioTracks(),
+    ]);
+    await context.resume();
+    source.start();
+    await video.play();
+    window.fixture = { context, source, video, duration: frames / 48000 };
+  };
+</script>
+</html>

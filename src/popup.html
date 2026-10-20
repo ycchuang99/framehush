@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Framehush</title>
+  <link rel="stylesheet" href="popup.css">
+  <script type="module" src="popup.js"></script>
+</head>
+<body>
+  <header><span class="mark" aria-hidden="true">f</span><div><h1>Framehush</h1><p>把注意力，留給人聲。</p></div></header>
+  <main>
+    <section class="panel" aria-labelledby="status">
+      <div class="eyebrow"><span id="indicator" aria-hidden="true"></span>即時人聲降噪</div>
+      <h2 id="status" aria-live="polite">讀取狀態中</h2>
+      <p id="detail" aria-live="polite">正在確認音訊狀態。</p>
+      <button id="action" type="button" disabled>請稍候</button>
+    </section>
+    <p class="privacy"><span aria-hidden="true">◈</span> 音訊只在此裝置處理，不錄音、不上傳。</p>
+    <p class="note">適合對話與旁白。音樂、音效可能改變；無法完全分離配樂或其他人聲。</p>
+  </main>
+  <footer>一次處理一個分頁的所有音訊</footer>
+</body>
+</html>

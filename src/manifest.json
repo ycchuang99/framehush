@@ -1,0 +1,19 @@
+{
+  "manifest_version": 3,
+  "name": "Framehush",
+  "version": "0.1.0",
+  "description": "在裝置上即時降低影片中的背景雜音，讓人聲更清楚。",
+  "minimum_chrome_version": "116",
+  "permissions": ["activeTab", "tabCapture", "offscreen"],
+  "background": { "service_worker": "worker.js", "type": "module" },
+  "action": { "default_popup": "popup.html", "default_title": "Framehush 人聲降噪" },
+  "commands": {
+    "_execute_action": {
+      "suggested_key": { "default": "Alt+Shift+N" },
+      "description": "開啟 Framehush"
+    }
+  },
+  "content_security_policy": {
+    "extension_pages": "script-src 'self' 'wasm-unsafe-eval'; object-src 'none'; connect-src 'self'"
+  }
+}

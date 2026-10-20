@@ -1,0 +1,14 @@
+{
+  "name": "framehush",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Local speech noise reduction for a Chrome tab",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "test": "npm run build && node --test tests/*.test.mjs",
+    "test:browser": "node scripts/browser-smoke.mjs"
+  },
+  "dependencies": { "@jitsi/rnnoise-wasm": "0.2.1" },
+  "engines": { "node": ">=20" }
+}
