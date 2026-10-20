@@ -33,14 +33,14 @@ export class AudioSession {
     const result = await withTimeout(
       Promise.race([operation, session.cancelled]),
       this.dependencies.timeout,
-      '啟動逾時，請停止後重試。',
+      'errorStartTimeout',
     );
-    if (this.current !== session) throw new Error('啟動已取消。');
+    if (this.current !== session) throw new Error('errorStartCancelled');
     return result;
   }
 
   async prepare(sessionId, tabId) {
-    if (this.current) throw new Error('已有分頁正在降噪，請先停止。');
+    if (this.current) throw new Error('errorTabBusy');
     const session = { sessionId, tabId };
     session.cancelled = new Promise((_, reject) => { session.cancel = reject; });
     session.cancelled.catch(() => {});
@@ -48,17 +48,17 @@ export class AudioSession {
     this.state = { phase: 'starting', sessionId, tabId };
     try {
       session.context = this.dependencies.createContext();
-      if (session.context.sampleRate !== 48000) throw new Error('此裝置無法提供 48 kHz 音訊。');
+      if (session.context.sampleRate !== 48000) throw new Error('errorSampleRate');
       await this.wait(session, session.context.audioWorklet.addModule('denoise-worklet.js'));
       session.node = this.dependencies.createNode(session.context);
       await this.wait(session, new Promise((resolve, reject) => {
-        session.node.onprocessorerror = () => reject(new Error('降噪處理器無法啟動。'));
+        session.node.onprocessorerror = () => reject(new Error('errorProcessorStart'));
         session.node.port.onmessage = ({ data }) => {
           if (data.type === 'ready') resolve();
           if (data.type === 'error') reject(new Error(data.message));
         };
       }));
-      session.node.onprocessorerror = () => { void this.fail(sessionId, '降噪處理器已中斷。'); };
+      session.node.onprocessorerror = () => { void this.fail(sessionId, 'errorProcessorInterrupted'); };
       session.node.port.onmessage = ({ data }) => {
         if (data.type === 'error') void this.fail(sessionId, data.message);
       };
@@ -71,7 +71,7 @@ export class AudioSession {
 
   async capture(sessionId, streamId) {
     const session = this.current;
-    if (!session || session.sessionId !== sessionId) throw new Error('啟動已取消。');
+    if (!session || session.sessionId !== sessionId) throw new Error('errorStartCancelled');
     try {
       const acquisition = this.dependencies.getUserMedia({
         audio: { mandatory: { chromeMediaSource: 'tab', chromeMediaSourceId: streamId } },
@@ -79,24 +79,24 @@ export class AudioSession {
       }).then(stream => {
         if (this.current !== session) {
           for (const track of stream.getTracks()) track.stop();
-          throw new Error('啟動已取消。');
+          throw new Error('errorStartCancelled');
         }
         session.stream = stream;
         return stream;
       });
       const stream = await this.wait(session, acquisition);
-      if (!stream.getAudioTracks().length) throw new Error('此分頁沒有可擷取的音訊。');
+      if (!stream.getAudioTracks().length) throw new Error('errorNoAudio');
       for (const track of stream.getTracks()) {
-        track.addEventListener('ended', () => { void this.fail(sessionId, '分頁音訊已結束，降噪已停止。'); });
-        if (track.readyState === 'ended') throw new Error('分頁音訊已結束。');
+        track.addEventListener('ended', () => { void this.fail(sessionId, 'errorAudioEnded'); });
+        if (track.readyState === 'ended') throw new Error('errorAudioEnded');
       }
       session.source = session.context.createMediaStreamSource(stream);
       session.source.connect(session.node);
       session.node.connect(session.context.destination);
       await this.wait(session, session.context.resume());
-      if (session.context.state !== 'running') throw new Error('音訊播放無法啟動。');
+      if (session.context.state !== 'running') throw new Error('errorPlaybackStart');
       session.context.onstatechange = () => {
-        if (session.context.state !== 'running') void this.fail(sessionId, '音訊播放已中斷，降噪已停止。');
+        if (session.context.state !== 'running') void this.fail(sessionId, 'errorPlaybackInterrupted');
       };
       this.state = { phase: 'running', sessionId, tabId: session.tabId };
       return this.status();
@@ -115,7 +115,7 @@ export class AudioSession {
     for (const track of session.stream?.getTracks() ?? []) {
       try { track.stop(); } catch {}
     }
-    session.cancel(new Error('啟動已取消。'));
+    session.cancel(new Error('errorStartCancelled'));
     if (session.context) session.context.onstatechange = null;
     if (session.node) {
       session.node.onprocessorerror = null;
@@ -125,7 +125,7 @@ export class AudioSession {
     try { session.node?.port.postMessage({ type: 'dispose' }); } catch {}
     try { session.node?.disconnect(); } catch {}
     try {
-      if (session.context) await withTimeout(session.context.close(), 1000, '關閉音訊逾時。');
+      if (session.context) await withTimeout(session.context.close(), 1000, 'errorCloseTimeout');
     } catch {}
     return this.status();
   }

@@ -11,7 +11,7 @@ export class FrameAdapter {
         const entry = { state: module._rnnoise_create(0), pointer: 0, output: new Float32Array(FRAME_SIZE) };
         this.channels.push(entry);
         entry.pointer = module._malloc(FRAME_SIZE * Float32Array.BYTES_PER_ELEMENT);
-        if (!entry.state || !entry.pointer) throw new Error('無法配置降噪記憶體。');
+        if (!entry.state || !entry.pointer) throw new Error('errorMemory');
       }
     } catch (error) {
       this.dispose();
@@ -33,7 +33,7 @@ export class FrameAdapter {
           const heap = this.module.HEAPF32;
           for (let index = 0; index < FRAME_SIZE; index++) {
             const value = heap[entry.pointer / 4 + index] / PCM_SCALE;
-            if (!Number.isFinite(value)) throw new Error('降噪處理產生無效音訊。');
+            if (!Number.isFinite(value)) throw new Error('errorInvalidAudio');
             entry.output[index] = Math.max(-1, Math.min(1, value));
           }
         }

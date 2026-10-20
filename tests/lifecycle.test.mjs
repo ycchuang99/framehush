@@ -88,7 +88,7 @@ test('stop during capture stops late tracks and cannot revive the session', asyn
   const { owner, stream, events } = fixture({ acquisition: acquisition.promise });
   await owner.prepare('a', 1);
   const capturing = owner.capture('a', 'token');
-  const rejected = assert.rejects(capturing, /取消/);
+  const rejected = assert.rejects(capturing, /errorStartCancelled/);
   await owner.stop();
   acquisition.resolve(stream);
   await rejected;
@@ -101,7 +101,7 @@ test('capture timeout stops a late stream', async () => {
   const acquisition = deferred();
   const { owner, stream, track } = fixture({ acquisition: acquisition.promise });
   await owner.prepare('a', 1);
-  await assert.rejects(owner.capture('a', 'token'), /逾時/);
+  await assert.rejects(owner.capture('a', 'token'), /errorStartTimeout/);
   acquisition.resolve(stream);
   await new Promise(resolve => setImmediate(resolve));
   assert.equal(track.readyState, 'ended');
@@ -129,7 +129,7 @@ test('runtime errors, track end, and interrupted contexts release tracks despite
 test('stale failures cannot stop a later session and duplicate prepare preserves the current session', async () => {
   const { owner } = fixture();
   await owner.prepare('a', 1);
-  await assert.rejects(owner.prepare('b', 2), /已有/);
+  await assert.rejects(owner.prepare('b', 2), /errorTabBusy/);
   await owner.stop();
   await owner.prepare('b', 2);
   await owner.fail('a', 'stale event');
@@ -140,7 +140,7 @@ test('stale failures cannot stop a later session and duplicate prepare preserves
 test('stop interrupts a worklet that never becomes ready', async () => {
   const { owner } = fixture({ noReady: true });
   const preparing = owner.prepare('a', 1);
-  const rejected = assert.rejects(preparing, /取消/);
+  const rejected = assert.rejects(preparing, /errorStartCancelled/);
   await owner.stop();
   await rejected;
   assert.deepEqual(owner.status(), { phase: 'idle' });

@@ -1,0 +1,131 @@
+{
+  "uiLanguage": {
+    "message": "en"
+  },
+  "extensionDescription": {
+    "message": "Reduce background noise in videos locally and in real time, so voices are easier to hear."
+  },
+  "actionTitle": {
+    "message": "Framehush voice denoising"
+  },
+  "commandOpen": {
+    "message": "Open Framehush"
+  },
+  "tagline": {
+    "message": "Keep your focus on the voice."
+  },
+  "eyebrow": {
+    "message": "Real-time voice denoising"
+  },
+  "statusLoading": {
+    "message": "Loading status"
+  },
+  "detailLoading": {
+    "message": "Checking the audio session."
+  },
+  "buttonWaiting": {
+    "message": "Please wait"
+  },
+  "status_idle": {
+    "message": "Hear voices clearly"
+  },
+  "status_starting": {
+    "message": "Preparing denoising"
+  },
+  "status_running": {
+    "message": "Denoising is on"
+  },
+  "status_error": {
+    "message": "Denoising stopped"
+  },
+  "detail_idle": {
+    "message": "Play a video, then enable denoising for the current tab."
+  },
+  "detail_starting": {
+    "message": "Loading the audio processor on your device."
+  },
+  "detail_running": {
+    "message": "Processing the enabled tab. Denoising continues when this panel closes."
+  },
+  "detail_error": {
+    "message": "Try enabling denoising again, or use another tab with audio."
+  },
+  "buttonStop": {
+    "message": "Stop denoising"
+  },
+  "buttonStart": {
+    "message": "Enable denoising"
+  },
+  "statusStopping": {
+    "message": "Stopping denoising"
+  },
+  "detailStopping": {
+    "message": "Releasing the tab audio."
+  },
+  "buttonStopping": {
+    "message": "Stopping"
+  },
+  "buttonStarting": {
+    "message": "Starting"
+  },
+  "privacy": {
+    "message": "Audio stays on this device. Never recorded or uploaded."
+  },
+  "note": {
+    "message": "Best for dialogue and narration. Music and sound effects may change; background music and other voices cannot be fully separated."
+  },
+  "errorProcessorTimeout": {
+    "message": "The audio processor is not responding. Stop denoising and try again."
+  },
+  "errorProcessorUnresponsive": {
+    "message": "The audio processor stopped responding. Denoising has stopped; try enabling it again."
+  },
+  "errorTabBusy": {
+    "message": "Another tab is being denoised. Stop denoising before switching tabs."
+  },
+  "errorCaptureTimeout": {
+    "message": "Tab audio authorization timed out. Please try again."
+  },
+  "errorNoTab": {
+    "message": "The current tab could not be found."
+  },
+  "errorStartTimeout": {
+    "message": "Startup timed out. Stop denoising and try again."
+  },
+  "errorStartCancelled": {
+    "message": "Startup was cancelled."
+  },
+  "errorSampleRate": {
+    "message": "This device cannot provide the required 48 kHz audio."
+  },
+  "errorProcessorStart": {
+    "message": "The denoising processor could not start."
+  },
+  "errorProcessorInterrupted": {
+    "message": "The denoising processor was interrupted."
+  },
+  "errorNoAudio": {
+    "message": "This tab has no audio available to capture."
+  },
+  "errorAudioEnded": {
+    "message": "The tab audio ended, so denoising has stopped."
+  },
+  "errorPlaybackStart": {
+    "message": "Audio playback could not start."
+  },
+  "errorPlaybackInterrupted": {
+    "message": "Audio playback was interrupted, so denoising has stopped."
+  },
+  "errorCloseTimeout": {
+    "message": "Closing the audio session timed out."
+  },
+  "errorMemory": {
+    "message": "Memory could not be allocated for denoising."
+  },
+  "errorInvalidAudio": {
+    "message": "The denoising processor produced invalid audio."
+  },
+  "errorUnexpected": {
+    "message": "Could not process this tab. Try again on a regular webpage with audio playing."
+  }
+}

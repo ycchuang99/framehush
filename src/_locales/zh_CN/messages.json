@@ -1,0 +1,131 @@
+{
+  "uiLanguage": {
+    "message": "zh-Hans"
+  },
+  "extensionDescription": {
+    "message": "在设备上实时降低视频中的背景噪声，让人声更清楚。"
+  },
+  "actionTitle": {
+    "message": "Framehush 人声降噪"
+  },
+  "commandOpen": {
+    "message": "打开 Framehush"
+  },
+  "tagline": {
+    "message": "把注意力，留给人声。"
+  },
+  "eyebrow": {
+    "message": "实时人声降噪"
+  },
+  "statusLoading": {
+    "message": "正在读取状态"
+  },
+  "detailLoading": {
+    "message": "正在确认音频状态。"
+  },
+  "buttonWaiting": {
+    "message": "请稍候"
+  },
+  "status_idle": {
+    "message": "让人声更清楚"
+  },
+  "status_starting": {
+    "message": "正在准备降噪"
+  },
+  "status_running": {
+    "message": "降噪已开启"
+  },
+  "status_error": {
+    "message": "降噪已停止"
+  },
+  "detail_idle": {
+    "message": "播放视频后，启用当前标签页的降噪。"
+  },
+  "detail_starting": {
+    "message": "正在加载设备上的音频处理器。"
+  },
+  "detail_running": {
+    "message": "正在处理已启用标签页的声音。关闭此面板后仍会继续。"
+  },
+  "detail_error": {
+    "message": "请重新启用，或换一个有声音的标签页。"
+  },
+  "buttonStop": {
+    "message": "停止降噪"
+  },
+  "buttonStart": {
+    "message": "启用降噪"
+  },
+  "statusStopping": {
+    "message": "正在停止降噪"
+  },
+  "detailStopping": {
+    "message": "正在释放标签页音频。"
+  },
+  "buttonStopping": {
+    "message": "正在停止"
+  },
+  "buttonStarting": {
+    "message": "正在启用"
+  },
+  "privacy": {
+    "message": "音频只在此设备处理，不录音、不上传。"
+  },
+  "note": {
+    "message": "适合对话与旁白。音乐、音效可能改变；无法完全分离配乐或其他人声。"
+  },
+  "errorProcessorTimeout": {
+    "message": "音频处理未响应，请停止后重试。"
+  },
+  "errorProcessorUnresponsive": {
+    "message": "音频处理未响应，已停止降噪，请重新启用。"
+  },
+  "errorTabBusy": {
+    "message": "已有标签页正在降噪，请先停止再切换。"
+  },
+  "errorCaptureTimeout": {
+    "message": "标签页音频授权超时，请重试。"
+  },
+  "errorNoTab": {
+    "message": "找不到当前标签页。"
+  },
+  "errorStartTimeout": {
+    "message": "启动超时，请停止后重试。"
+  },
+  "errorStartCancelled": {
+    "message": "启动已取消。"
+  },
+  "errorSampleRate": {
+    "message": "此设备无法提供降噪所需的 48 kHz 音频。"
+  },
+  "errorProcessorStart": {
+    "message": "降噪处理器无法启动。"
+  },
+  "errorProcessorInterrupted": {
+    "message": "降噪处理器已中断。"
+  },
+  "errorNoAudio": {
+    "message": "此标签页没有可捕获的音频。"
+  },
+  "errorAudioEnded": {
+    "message": "标签页音频已结束，降噪已停止。"
+  },
+  "errorPlaybackStart": {
+    "message": "音频播放无法启动。"
+  },
+  "errorPlaybackInterrupted": {
+    "message": "音频播放已中断，降噪已停止。"
+  },
+  "errorCloseTimeout": {
+    "message": "关闭音频超时。"
+  },
+  "errorMemory": {
+    "message": "无法分配降噪内存。"
+  },
+  "errorInvalidAudio": {
+    "message": "降噪处理产生无效音频。"
+  },
+  "errorUnexpected": {
+    "message": "无法处理此标签页。请在普通网页播放音频后重试。"
+  }
+}

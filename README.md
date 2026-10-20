@@ -2,9 +2,11 @@
 
 在 Chrome 中即時降低影片人聲的背景雜音。音訊只在本機處理，不錄音、不上傳。
 
+介面依 Chrome 語言自動顯示繁體中文、簡體中文或英文；其他語言使用英文。資料處理方式見[隱私權政策](docs/privacy-policy.md)。
+
 ## 安裝
 
-使用需要 Chrome 116 以上。從原始碼建置需要 Node.js 20 以上。
+使用需要 Chrome 116 以上。開發與建置建議使用 Node.js 24；工具支援的最低版本見 `package.json` 的 `engines`。
 
 1. 在專案目錄執行 `npm ci`。
 2. 執行 `npm run build`，產生 `dist` 資料夾。
@@ -16,17 +18,27 @@
 
 關閉面板後仍會繼續處理。再次開啟面板即可停止。可用 `Alt+Shift+N` 開啟面板。若快捷鍵衝突，在 `chrome://extensions/shortcuts` 調整。
 
-一次只處理一個分頁的所有音訊。若要換分頁，先停止目前的降噪。其他分頁也能開啟面板並停止。
+若要換分頁，先停止目前的降噪。其他分頁也能開啟面板並停止。
 
 ## 驗證
 
-修改與重建需要 Node.js 20 以上。在專案目錄執行 `npm ci` 與 `npm run build`，再於 Chrome 的擴充功能頁面重新載入。
+在專案目錄執行 `npm ci` 與 `npm run build`，再於 Chrome 的擴充功能頁面重新載入。
 
 執行 `npm test`，檢查實際 RNNoise WASM、音訊分幀與啟動及清理行為。
 
-執行 `npm run test:browser` 可檢查未封裝擴充功能。此選用檢查需要 Playwright 與支援 `Extensions.triggerAction` 的新版 Chromium。本次使用 Playwright 1.62.1 與 Chrome for Testing 151。
+執行 `npm run lint`，以 ESLint 檢查擴充功能、建置腳本與測試。每次 push 或 pull request 都會由 GitHub Actions 執行 lint、測試、封裝檢查，以及實際 Chromium 音訊與擴充功能測試。
+
+先執行 `npx playwright install chromium` 安裝測試瀏覽器，再執行 `npm run build` 與 `npm run test:browser` 檢查未封裝擴充功能。專案固定使用 Playwright 1.62.1，以及其附帶、支援 `Extensions.triggerAction` 的 Chromium。
 可用 `PLAYWRIGHT_MODULE_PATH` 指向已安裝的 Playwright 模組，`CHROME_PATH` 指向 Chrome for Testing 執行檔。測試使用獨立設定檔，不修改日常 Chrome。
-瀏覽器測試會在 `verification` 產生執行結果與實際面板截圖。這些產物不納入版本控制。瀏覽器測試確認音訊圖輸出與擷取釋放，不代表已經用喇叭人工聆聽。
+瀏覽器測試會在 `verification` 產生執行結果與實際面板截圖；GitHub Actions 會保留這些測試產物 14 天，失敗時也會上傳。這些產物不納入版本控制。瀏覽器測試確認音訊圖輸出與擷取釋放，不代表已經用喇叭人工聆聽。
+
+## 發行
+
+執行 `npm run package`，產生 `framehush-<版本>.zip`。此指令需要系統的 `zip` 工具，macOS 與 GitHub 的 Ubuntu runner 已提供。ZIP 根目錄包含 `manifest.json`，可直接上傳至 Chrome 線上應用程式商店。
+
+發行新版本時，同步更新 `package.json`、`package-lock.json` 與 `src/manifest.json` 的版本，提交後建立並 push 對應標籤，例如 `v0.1.1`。GitHub Actions 會再次執行 lint、單元測試與 Chromium 測試，確認標籤和版本一致，再建立附帶 ZIP 的 GitHub Release。這個流程不會自動提交 Chrome 商店審核。
+
+商店文案、圖片與權限說明見[上架資料](store/submission.md)。
 
 ## 使用限制
 

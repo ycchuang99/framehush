@@ -6,9 +6,21 @@
   "description": "Local speech noise reduction for a Chrome tab",
   "scripts": {
     "build": "node scripts/build.mjs",
+    "lint": "eslint . --max-warnings=0",
     "test": "npm run build && node --test tests/*.test.mjs",
-    "test:browser": "node scripts/browser-smoke.mjs"
+    "test:browser": "node scripts/browser-smoke.mjs",
+    "package": "npm run build && node scripts/package.mjs"
   },
-  "dependencies": { "@jitsi/rnnoise-wasm": "0.2.1" },
-  "engines": { "node": ">=20" }
+  "dependencies": {
+    "@jitsi/rnnoise-wasm": "0.2.1"
+  },
+  "engines": {
+    "node": "^20.19.0 || ^22.13.0 || >=24"
+  },
+  "devDependencies": {
+    "@eslint/js": "10.0.1",
+    "eslint": "10.13.0",
+    "globals": "17.13.0",
+    "playwright": "1.62.1"
+  }
 }

@@ -96,6 +96,7 @@ try {
   await cp(resolve(root, "dist"), extension, { recursive: true });
   context = await chromium.launchPersistentContext(profile, {
     executablePath: process.env.CHROME_PATH || undefined,
+    channel: process.env.CHROME_PATH ? undefined : "chromium",
     headless: process.env.HEADED !== "1",
     ignoreDefaultArgs: ["--disable-extensions", "--mute-audio"],
     args: [

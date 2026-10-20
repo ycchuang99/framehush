@@ -1,0 +1,131 @@
+{
+  "uiLanguage": {
+    "message": "zh-Hant"
+  },
+  "extensionDescription": {
+    "message": "在裝置上即時降低影片中的背景雜音，讓人聲更清楚。"
+  },
+  "actionTitle": {
+    "message": "Framehush 人聲降噪"
+  },
+  "commandOpen": {
+    "message": "開啟 Framehush"
+  },
+  "tagline": {
+    "message": "把注意力，留給人聲。"
+  },
+  "eyebrow": {
+    "message": "即時人聲降噪"
+  },
+  "statusLoading": {
+    "message": "讀取狀態中"
+  },
+  "detailLoading": {
+    "message": "正在確認音訊狀態。"
+  },
+  "buttonWaiting": {
+    "message": "請稍候"
+  },
+  "status_idle": {
+    "message": "讓人聲更清楚"
+  },
+  "status_starting": {
+    "message": "正在準備降噪"
+  },
+  "status_running": {
+    "message": "降噪已開啟"
+  },
+  "status_error": {
+    "message": "降噪已停止"
+  },
+  "detail_idle": {
+    "message": "播放影片後，啟用目前分頁的降噪。"
+  },
+  "detail_starting": {
+    "message": "正在載入裝置上的音訊處理器。"
+  },
+  "detail_running": {
+    "message": "正在處理已啟用分頁的聲音。關閉此面板後仍會繼續。"
+  },
+  "detail_error": {
+    "message": "請重新啟用，或換一個有聲音的分頁。"
+  },
+  "buttonStop": {
+    "message": "停止降噪"
+  },
+  "buttonStart": {
+    "message": "啟用降噪"
+  },
+  "statusStopping": {
+    "message": "正在停止降噪"
+  },
+  "detailStopping": {
+    "message": "正在釋放分頁音訊。"
+  },
+  "buttonStopping": {
+    "message": "正在停止"
+  },
+  "buttonStarting": {
+    "message": "正在啟用"
+  },
+  "privacy": {
+    "message": "音訊只在此裝置處理，不錄音、不上傳。"
+  },
+  "note": {
+    "message": "適合對話與旁白。音樂、音效可能改變；無法完全分離配樂或其他人聲。"
+  },
+  "errorProcessorTimeout": {
+    "message": "音訊處理未回應，請按停止後重試。"
+  },
+  "errorProcessorUnresponsive": {
+    "message": "音訊處理未回應，已停止降噪，請重新啟用。"
+  },
+  "errorTabBusy": {
+    "message": "已有分頁正在降噪，請先停止再切換。"
+  },
+  "errorCaptureTimeout": {
+    "message": "分頁音訊授權逾時，請重試。"
+  },
+  "errorNoTab": {
+    "message": "找不到目前分頁。"
+  },
+  "errorStartTimeout": {
+    "message": "啟動逾時，請停止後重試。"
+  },
+  "errorStartCancelled": {
+    "message": "啟動已取消。"
+  },
+  "errorSampleRate": {
+    "message": "此裝置無法提供降噪所需的 48 kHz 音訊。"
+  },
+  "errorProcessorStart": {
+    "message": "降噪處理器無法啟動。"
+  },
+  "errorProcessorInterrupted": {
+    "message": "降噪處理器已中斷。"
+  },
+  "errorNoAudio": {
+    "message": "此分頁沒有可擷取的音訊。"
+  },
+  "errorAudioEnded": {
+    "message": "分頁音訊已結束，降噪已停止。"
+  },
+  "errorPlaybackStart": {
+    "message": "音訊播放無法啟動。"
+  },
+  "errorPlaybackInterrupted": {
+    "message": "音訊播放已中斷，降噪已停止。"
+  },
+  "errorCloseTimeout": {
+    "message": "關閉音訊逾時。"
+  },
+  "errorMemory": {
+    "message": "無法配置降噪記憶體。"
+  },
+  "errorInvalidAudio": {
+    "message": "降噪處理產生無效音訊。"
+  },
+  "errorUnexpected": {
+    "message": "無法處理此分頁。請在一般網頁播放音訊後重試。"
+  }
+}

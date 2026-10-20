@@ -12,7 +12,7 @@ class DenoiseProcessor extends AudioWorkletProcessor {
       }
     };
     try {
-      if (sampleRate !== 48000) throw new Error('降噪需要 48 kHz 音訊。');
+      if (sampleRate !== 48000) throw new Error('errorSampleRate');
       this.adapter = new FrameAdapter(createModule());
       this.port.postMessage({ type: 'ready' });
     } catch (error) {
